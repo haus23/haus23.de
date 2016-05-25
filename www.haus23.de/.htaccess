@@ -1,0 +1,9 @@
+AddType image/x-icon .ico
+Options +indexes
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^haus23\.de$ [NC]
+RewriteRule ^(.*)$ http://haus23\.de/$1 [R=301,L]
+Redirect /index.html http://haus23.de/portal/
+Redirect /index.php http://haus23.de/portal/
+Redirect /forum/index.php http://haus23.de/portal/
+Redirect /forum http://haus23.de/portal
