@@ -1,3 +1,8 @@
+AddHandler php-fastcgi5.6 .php
+
+# Ab hier die alte .htaccess
+# TODO: alles überprüfen
+
 AddType image/x-icon .ico
 Options +indexes
 RewriteEngine On
