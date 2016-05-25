@@ -1,0 +1,15 @@
+{
+    "name": "haus23/haus23.de",
+    "description": "Portal with SMF integration",
+    "type": "project",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Micha Alt",
+            "email": "micha@haus23.net"
+        }
+    ],
+    "require": {
+        "silex/silex": "~2.0"
+    }
+}
