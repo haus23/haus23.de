@@ -2,6 +2,9 @@
 # Composer binary
 /composer.phar
 
-# Composer dependencies
-/vendor
+# Composer dependencies (lock file to remove, when release done)
+/composer.lock
+/vendor/
 
+# PhpStorm settings
+/.idea/
