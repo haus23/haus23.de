@@ -11,5 +11,8 @@
   "bugs": {
     "url": "https://github.com/haus23/haus23.de/issues"
   },
-  "homepage": "https://github.com/haus23/haus23.de#readme"
+  "homepage": "https://github.com/haus23/haus23.de#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
