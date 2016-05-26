@@ -12,11 +12,12 @@ var webroot = './www.haus23.de';
 var paths = {
     src: {
         js:   './app/client/scripts',
+        css:  './app/client/styles',
         twig: './app/views'
     },
     dst: {
-        js:  webroot + '/js',
-        css: webroot + '/css'
+        js:  webroot + '/assets/js',
+        css: webroot + '/assets/css'
     }
 }
 
@@ -24,8 +25,25 @@ var paths = {
 
 gulp.task('default',['vendors','inject']);
 
+// Handle the vendor assets
+gulp.task('vendors',['vendor:scripts','vendor:styles']);
+
+// Compile the vendor styles
+gulp.task('vendor:styles',function () {
+    return gulp.src(paths.src.css + '/vendors.scss')
+        .pipe($.sass())
+        .pipe(gulp.dest(paths.dst.css));
+});
+
+// Compile the app styles
+gulp.task('styles',function () {
+    return gulp.src(paths.src.css + '/app.scss')
+        .pipe($.sass())
+        .pipe(gulp.dest(paths.dst.css));
+});
+
 // Browserify the vendor scripts
-gulp.task('vendors',function () {
+gulp.task('vendor:scripts',function () {
     return browserify(paths.src.js + '/vendors.js')
         .bundle()
         .pipe(source('bundle.js'))
@@ -33,7 +51,7 @@ gulp.task('vendors',function () {
 });
 
 // Inject generated styles and scripts
-gulp.task('inject',function () {
+gulp.task('inject',['vendors','styles'], function () {
     
     var target  = gulp.src( paths.src.twig + '/index.html.twig');
     var sources = gulp.src( [paths.dst.js + '/**/*.js', paths.dst.css + '/**/*.css'], {read: false});
