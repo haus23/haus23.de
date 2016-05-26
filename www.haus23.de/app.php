@@ -10,7 +10,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 $app->get('/{name}', function ($name) use ($app) {
-    return $app['twig']->render('index.twig', array(
+    return $app['twig']->render('index.html.twig', array(
         'name' => $name
     ));
 });
