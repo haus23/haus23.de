@@ -12,5 +12,9 @@
     "require": {
         "silex/silex": "~2.0",
         "twig/twig": "^1.24"
+    },
+    "autoload": {
+        "psr-4": { "Haus23\\": "src/" },
+        "classmap": [ "app/AppKernel.php" ]
     }
 }
