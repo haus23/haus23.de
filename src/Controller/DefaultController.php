@@ -24,7 +24,7 @@ class DefaultController
     }
 
     public function indexAction($response)
-    {   var_dump($this->smf->recentTopics());
+    {    var_dump($this->smf->recentTopics());
         return $this->twig->render($response, 'index.html.twig');
     }
 }
