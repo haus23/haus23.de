@@ -1,28 +1,44 @@
 <?php
 
+use Interop\Container\ContainerInterface;
 use Slim\Http\Response;
+use Slim\Views\Twig;
 
-class AppKernel extends \Slim\App
+class AppKernel extends \DI\Bridge\Slim\App
 {
-    public function __construct($config = [])
+    public function __construct()
     {
-        parent::__construct($config);
+        parent::__construct();
 
-        // Get container
-        $container = $this->getContainer();
-
-        // Register component on container
-        $container['view'] = function ($container) {
-            $view = new \Slim\Views\Twig(__DIR__.'/views', [
-                'cache' => false
-            ]);
-
-            return $view;
-        };
-
-        $this->get('/', function (\Slim\Http\Request $request, Response $response) {
-            return $this->view->render($response, 'index.html.twig');
+        $this->get('/', function (Response $response, Twig $twig) {
+            return $twig->render($response, 'index.html.twig');
         });
+    }
+
+    protected function configureContainer(\DI\ContainerBuilder $builder)
+    {
+        // Enable debug information
+        $builder->addDefinitions(['settings.displayErrorDetails' => true]);
+
+        // Register services
+        $definitions = [
+
+            \Slim\Views\Twig::class => function (ContainerInterface $c) {
+                $twig = new \Slim\Views\Twig(__DIR__.'/views', [
+                    'cache' => false
+                ]);
+
+                $twig->addExtension(new \Slim\Views\TwigExtension(
+                    $c->get('router'),
+                    $c->get('request')->getUri()
+                ));
+
+                return $twig;
+            },
+
+        ];
+
+        $builder->addDefinitions($definitions);
     }
 
 }
