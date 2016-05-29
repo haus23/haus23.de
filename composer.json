@@ -1,20 +1,24 @@
 {
-    "name": "haus23/haus23.de",
-    "description": "Portal with SMF integration",
-    "type": "project",
-    "license": "ISC",
-    "authors": [
-        {
-            "name": "Micha Alt",
-            "email": "micha@haus23.net"
-        }
-    ],
-    "require": {
-        "silex/silex": "~2.0",
-        "twig/twig": "^1.24"
-    },
-    "autoload": {
-        "psr-4": { "Haus23\\": "src/" },
-        "classmap": [ "app/AppKernel.php" ]
+  "name": "haus23/haus23.de",
+  "description": "Portal with SMF integration",
+  "type": "project",
+  "license": "ISC",
+  "authors": [
+    {
+      "name": "Micha Alt",
+      "email": "micha@haus23.net"
     }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": { "Haus23\\": "src/" },
+    "classmap": [ "app/AppKernel.php" ]
+  },
+  "scripts": {
+    "run": [
+      "echo 'Started web server on http://localhost:8008'",
+      "php -S localhost:8008 -t www.haus23.de"
+    ]
+  }
 }

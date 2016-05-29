@@ -2,8 +2,4 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$app = new AppKernel();
-$app['debug'] = true;
-
-$app->run();
-
+echo '<h2>No framework here</h2>';
