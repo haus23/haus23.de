@@ -1,23 +1,28 @@
 <?php
 
-class AppKernel extends \Silex\Application
+use Slim\Http\Response;
+
+class AppKernel extends \Slim\App
 {
-    /**
-     * AppKernel constructor.
-     */
-    public function __construct()
+    public function __construct($config = [])
     {
-        parent::__construct();
+        parent::__construct($config);
 
-        $this->register(new Silex\Provider\ServiceControllerServiceProvider());
-        $this->register(new Silex\Provider\TwigServiceProvider(), array(
-            'twig.path' => __DIR__.'/../app/views',
-        ));
+        // Get container
+        $container = $this->getContainer();
 
-        $this['default.controller'] = function() {
-            return new \Haus23\Controller\DefaultController($this['twig']);
+        // Register component on container
+        $container['view'] = function ($container) {
+            $view = new \Slim\Views\Twig(__DIR__.'/views', [
+                'cache' => false
+            ]);
+
+            return $view;
         };
 
-        $this->get('/', "default.controller:indexAction");
+        $this->get('/', function (\Slim\Http\Request $request, Response $response) {
+            return $this->view->render($response, 'index.html.twig');
+        });
     }
+
 }
