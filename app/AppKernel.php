@@ -10,9 +10,7 @@ class AppKernel extends \DI\Bridge\Slim\App
     {
         parent::__construct();
 
-        $this->get('/', function (Response $response, Twig $twig) {
-            return $twig->render($response, 'index.html.twig');
-        });
+        $this->get('/', [\Haus23\Controller\DefaultController::class, 'indexAction']);
     }
 
     protected function configureContainer(\DI\ContainerBuilder $builder)
