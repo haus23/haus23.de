@@ -10,6 +10,7 @@
     }
   ],
   "require": {
+    "slim/slim": "^3.4"
   },
   "autoload": {
     "psr-4": { "Haus23\\": "src/" },
