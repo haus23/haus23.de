@@ -6,5 +6,12 @@
   padding-left: 48px;
   margin-right: 2em; }
 
+#haus23 .card > .list-group {
+  font-size: 0.8em; }
+  #haus23 .card > .list-group .list-group-item {
+    border: none; }
+  #haus23 .card > .list-group .list-group-item:not(:first-child) {
+    border-top: 1px solid #ddd; }
+
 #haus23 .topic-date {
   display: block; }
