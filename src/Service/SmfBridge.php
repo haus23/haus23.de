@@ -2,8 +2,6 @@
 
 namespace Haus23\Service;
 
-require_once SMF_BASE_PATH . '/ssi.php';
-
 class SmfBridge
 {
     public function recentTopics() {
