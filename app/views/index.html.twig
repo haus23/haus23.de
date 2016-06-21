@@ -33,6 +33,15 @@
         <div class="col-sm-3">
             <div class="card">
                 <h5 class="card-header">Neues an Board</h5>
+                <ul class="list-group">
+                    {% for t in topics %}
+                    <li class="list-group-item{{ t.unread ? ' font-weight-bold' }}">
+                        <span>{{ t.poster }}:</span>
+                        <a href="{{ t.href }}">{{ t.subject }}</a>
+                        <span class="topic-date">{{ t.date }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>

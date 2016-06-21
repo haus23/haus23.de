@@ -23,8 +23,7 @@ class DefaultController
         $this->smf = $smf;
     }
 
-    public function indexAction($response)
-    {   var_dump($this->smf->recentTopics());
-        return $this->twig->render($response, 'index.html.twig');
+    public function indexAction($response) {
+        return $this->twig->render($response, 'index.html.twig', [ 'topics' => $this->smf->recentTopics()]);
     }
 }
