@@ -11,6 +11,7 @@ class AppKernel extends \DI\Bridge\Slim\App
         parent::__construct();
 
         $this->get('/', [\Haus23\Controller\DefaultController::class, 'indexAction']);
+        $this->get('/user', [\Haus23\Controller\DefaultController::class, 'userInfoAction']);
     }
 
     protected function configureContainer(\DI\ContainerBuilder $builder)
