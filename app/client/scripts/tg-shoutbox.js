@@ -3,7 +3,7 @@ var backendUrl = 'https://bot.haus23.net/shouts';
 
 // DOM caching
 var $shoutMsg = $('#shout-msg');
-var $shoutItemTpl = $('#shout-item-tpl');
+var $shoutItemTpl = $('#shout-item-tpl').html();
 var $shoutList = $('#shout-list');
 
 // initially load and rendner the past shouts
@@ -24,7 +24,8 @@ $.getJSON(url).done(function(data) {
 
 function loadShouts() {
     $.getJSON(backendUrl).done(function (data) {
-        $(data).each(function(shout){
+        $.each(data, function(){
+            var shout = this;
             var $item = $($shoutItemTpl);
             $('#shout-author',$item).html(shout.author);
             $('#shout-content',$item).html(shout.msg);
