@@ -28,6 +28,9 @@ gulp.task('default',['vendors','inject']);
 // Handle the vendor assets
 gulp.task('vendors',['vendor:scripts','vendor:styles']);
 
+// Handle the app assets
+gulp.task('build', ['scripts','styles']);
+
 // Compile the vendor styles
 gulp.task('vendor:styles',function () {
     return gulp.src(paths.src.css + '/vendors.scss')
@@ -50,8 +53,16 @@ gulp.task('vendor:scripts',function () {
         .pipe(gulp.dest(paths.dst.js));
 });
 
+// Browserify the app scripts
+gulp.task('scripts',function () {
+    return browserify(paths.src.js + '/tg-shoutbox.js')
+        .bundle()
+        .pipe(source('main.js'))
+        .pipe(gulp.dest(paths.dst.js));
+});
+
 // Inject generated styles and scripts
-gulp.task('inject',['vendors','styles'], function () {
+gulp.task('inject',['vendors','build'], function () {
     
     var target  = gulp.src( paths.src.twig + '/index.html.twig');
     var sources = gulp.src( [paths.dst.js + '/**/*.js', paths.dst.css + '/**/*.css'], {read: false});
