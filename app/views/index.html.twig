@@ -47,6 +47,14 @@
         <div class="col-md-push-6 col-md-3">
             <div class="card shoutbox">
                 <h5 class="card-header">Telegramme</h5>
+                <ul class="list-group" id="shout-list">
+                    <script type="text/template" id="shout-item-tpl">
+                        <li class="list-group-item">
+                            <div id="shout-author" class="font-weight-bold"></div>
+                            <div id="shout-content"></div>
+                        </li>
+                    </script>
+                </ul>
                 <div class="card-block shout-area" style="display: none">
                     <textarea name="msg" id="shout-msg" cols="30" rows="auto"></textarea>
                     <div class="text-xs-right">
