@@ -29,9 +29,14 @@ function pushShout() {
     if( user.anonymous || msg.length == 0) {
         return;
     }
-    $.post(backendUrl, {
-        author: user.name,
-        msg: msg
+    $.ajax({
+        type: 'POST',
+        url: backendUrl,
+        contentType: "application/json; charset=utf-8",
+        data: {
+            author: user.name,
+            msg: msg
+        }
     });
     $shoutMsg.val('');
 }
