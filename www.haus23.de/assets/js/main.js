@@ -34,10 +34,11 @@ function pushShout() {
         type: 'POST',
         url: backendUrl,
         contentType: "application/json; charset=utf-8",
-        data: {
+        data: JSON.stringify({
             author: user.name,
             msg: msg
-        }
+        }),
+        dataType: 'json'
     });
     $shoutMsg.val('');
 }
