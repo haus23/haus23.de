@@ -1,10 +1,18 @@
 
-var backendUrl = 'https://bot.haus23.net:8001';
+var io = require("socket.io-client");
+
+var backendUrl = 'https://bot.haus23.net';
 
 // DOM query caching
 var $shoutMsg     = $('#shout-msg');
 var $shoutItemTpl = $('#shout-item-tpl').html();
 var $shoutList    = $('#shout-list');
+
+// Build up connection
+var socket = io(backendUrl);
+socket.on('connect', function () {
+    console.log('Yeah!');
+});
 
 // // initially load and rendner the past shouts
 // loadShouts();
