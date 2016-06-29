@@ -12,6 +12,11 @@ var $shoutList    = $('#shout-list');
 var socket = io(backendUrl);
 socket.on('connect', function () {
     console.log('Yeah!');
+    socket.emit('req shouts');
+});
+
+socket.on('snd shouts', function (data) {
+    console.log(data);
 });
 
 // // initially load and rendner the past shouts
