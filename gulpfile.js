@@ -11,9 +11,10 @@ var webroot = './www.haus23.de';
 
 var paths = {
     src: {
-        js:   './app/client/scripts',
-        css:  './app/client/styles',
-        twig: './app/views'
+        js:      './app/client/scripts',
+        css:     './app/client/styles',
+        vendors: './app/client/vendors',
+        twig:    './app/views'
     },
     dst: {
         js:  webroot + '/assets/js',
@@ -33,23 +34,24 @@ gulp.task('build', ['scripts','styles']);
 
 // Compile the vendor styles
 gulp.task('vendor:styles',function () {
-    return gulp.src(paths.src.css + '/vendors.scss')
+    return gulp.src(paths.src.vendors + '/bootstrap.scss')
         .pipe($.sass())
+        .pipe($.rename('bootstrap-bundle.css'))
         .pipe(gulp.dest(paths.dst.css));
 });
 
 // Compile the app styles
 gulp.task('styles',function () {
-    return gulp.src(paths.src.css + '/app.scss')
+    return gulp.src(paths.src.css + '/site.scss')
         .pipe($.sass())
         .pipe(gulp.dest(paths.dst.css));
 });
 
 // Browserify the vendor scripts
 gulp.task('vendor:scripts',function () {
-    return browserify(paths.src.js + '/vendors.js')
+    return browserify(paths.src.vendors + '/bootstrap.js')
         .bundle()
-        .pipe(source('bundle.js'))
+        .pipe(source('bootstrap-bundle.js'))
         .pipe(gulp.dest(paths.dst.js));
 });
 
