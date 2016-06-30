@@ -16,7 +16,13 @@ socket.on('connect', function () {
 });
 
 socket.on('snd shouts', function (data) {
-    console.log(data);
+    $.each(data.shouts, function(){
+        var shout = this;
+        var $item = $($shoutItemTpl);
+        $('#shout-author',$item).html(shout.author);
+        $('#shout-content',$item).html(shout.msg);
+        $shoutList.prepend($item);
+    });
 });
 
 // // initially load and rendner the past shouts
