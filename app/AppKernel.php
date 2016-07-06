@@ -19,8 +19,6 @@ class AppKernel extends \DI\Bridge\Slim\App
         $builder->addDefinitions([
             // Enable debug information
             'settings.displayErrorDetails' => true,
-            // JWT secret
-            'settings.jwtSecret' => getenv('JWT_SECRET') ?: '',
         ]);
 
         // Register services
@@ -38,10 +36,6 @@ class AppKernel extends \DI\Bridge\Slim\App
 
                 return $twig;
             },
-
-            \Firebase\JWT\JWT::class => function (ContainerInterface $c) {
-                return \Firebase\JWT\JWT::encode([], $c->get('settings.jwtSecret'));
-            }
         ];
 
         $builder->addDefinitions($definitions);

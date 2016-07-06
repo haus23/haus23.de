@@ -16,20 +16,16 @@ class DefaultController
     /** @var SmfBridge */
     private $smf;
 
-    /** @var JWT */
-    private $token;
-
     /**
      * DefaultController constructor.
      * @param Twig $twig
      * @param SmfBridge $smf
-     * @param JWT $token
+     * @param string $token
      */
-    public function __construct(Twig $twig, SmfBridge $smf, JWT $token)
+    public function __construct(Twig $twig, SmfBridge $smf)
     {
         $this->twig = $twig;
         $this->smf = $smf;
-        $this->token = $token;
     }
 
     /**
@@ -46,6 +42,7 @@ class DefaultController
      */
     public function userInfoAction($response)
     {
-        return $response->withJson([ 'token' => $this->token, 'user' => $this->smf->getUserInfo()]);
+        $token = JWT::encode([], getenv('JWT_SECRET'));
+        return $response->withJson([ 'token' => $token, 'user' => $this->smf->getUserInfo()]);
     }
 }
