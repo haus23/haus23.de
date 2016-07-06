@@ -8,8 +8,7 @@ class AppKernel extends \DI\Bridge\Slim\App
 {
     public function __construct()
     {
-        $config = require 'config/config.php';
-        parent::__construct($config);
+        parent::__construct();
 
         $this->get('/', [\Haus23\Controller\DefaultController::class, 'indexAction']);
         $this->get('/user', [\Haus23\Controller\DefaultController::class, 'userInfoAction']);
