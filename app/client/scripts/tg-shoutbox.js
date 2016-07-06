@@ -35,8 +35,11 @@ socket.on('rcv shout', function (shout) {
 // get current user info
 var url = window.location + '/user';
 var user;
+var token;
+
 $.getJSON(url).done(function(data) {
-    user = data;
+    user = data.user;
+    token = data.token;
     if( !user.anonymous ) {
         // show shout area
         $('.shout-area').show();

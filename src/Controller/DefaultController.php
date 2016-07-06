@@ -40,6 +40,6 @@ class DefaultController
      */
     public function userInfoAction($response)
     {
-        return $response->withJson($this->smf->getUserInfo());
+        return $response->withJson([ 'token' => null, 'user' => $this->smf->getUserInfo()]);
     }
 }
