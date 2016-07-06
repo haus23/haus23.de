@@ -2,6 +2,7 @@
 
 namespace Haus23\Controller;
 
+use Firebase\JWT\JWT;
 use Haus23\Service\SmfBridge;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Http\Response;
@@ -15,15 +16,20 @@ class DefaultController
     /** @var SmfBridge */
     private $smf;
 
+    /** @var JWT */
+    private $token;
+
     /**
      * DefaultController constructor.
      * @param Twig $twig
      * @param SmfBridge $smf
+     * @param JWT $token
      */
-    public function __construct(Twig $twig, SmfBridge $smf)
+    public function __construct(Twig $twig, SmfBridge $smf, JWT $token)
     {
         $this->twig = $twig;
         $this->smf = $smf;
+        $this->token = $token;
     }
 
     /**
@@ -40,6 +46,6 @@ class DefaultController
      */
     public function userInfoAction($response)
     {
-        return $response->withJson([ 'token' => null, 'user' => $this->smf->getUserInfo()]);
+        return $response->withJson([ 'token' => $this->token, 'user' => $this->smf->getUserInfo()]);
     }
 }

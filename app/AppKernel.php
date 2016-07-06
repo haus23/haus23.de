@@ -8,7 +8,8 @@ class AppKernel extends \DI\Bridge\Slim\App
 {
     public function __construct()
     {
-        parent::__construct();
+        $config = require 'config/config.php';
+        parent::__construct($config);
 
         $this->get('/', [\Haus23\Controller\DefaultController::class, 'indexAction']);
         $this->get('/user', [\Haus23\Controller\DefaultController::class, 'userInfoAction']);
@@ -16,8 +17,12 @@ class AppKernel extends \DI\Bridge\Slim\App
 
     protected function configureContainer(\DI\ContainerBuilder $builder)
     {
-        // Enable debug information
-        $builder->addDefinitions(['settings.displayErrorDetails' => true]);
+        $builder->addDefinitions([
+            // Enable debug information
+            'settings.displayErrorDetails' => true,
+            // JWT secret
+            'settings.jwtSecret' => getenv('JWT_SECRET') ?: '',
+        ]);
 
         // Register services
         $definitions = [
@@ -35,6 +40,9 @@ class AppKernel extends \DI\Bridge\Slim\App
                 return $twig;
             },
 
+            \Firebase\JWT\JWT::class => function (ContainerInterface $c) {
+                return \Firebase\JWT\JWT::encode([], $c->get('settings.jwtSecret'));
+            }
         ];
 
         $builder->addDefinitions($definitions);
