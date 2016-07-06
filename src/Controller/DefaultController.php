@@ -42,7 +42,8 @@ class DefaultController
      */
     public function userInfoAction($response)
     {
-        $token = JWT::encode([], getenv('JWT_SECRET'));
-        return $response->withJson([ 'token' => $token, 'user' => $this->smf->getUserInfo()]);
+        $userInfo = $this->smf->getUserInfo();
+        $token = JWT::encode(['username'=>$userInfo['name']], getenv('JWT_SECRET'));
+        return $response->withJson([ 'token' => $token, 'user' => $userInfo]);
     }
 }
